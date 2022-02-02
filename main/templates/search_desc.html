@@ -1,0 +1,95 @@
+{% extends 'menu.html' %}
+{% block titulo %} Buscador de criptomonedas {% endblock %}	    
+{% block contenido %} 
+	<center>
+		<br><br>
+		<form class="form-inline col-md-4"	 id="formulario" method="post" action=''>{% csrf_token %}
+			<div style="border: 1px solid; border-radius:5px;" class="form-inline">
+				<div class= "form-group">
+					<input class="form-control" style="width: 500px; height: 50px; border-radius:5px" name="desc" id="desc" placeholder="Escribe aqui tu busqueda"/>
+				</div>
+				<div class= "form-group">
+					<button type="submit" class="btn btn-primary" style="background-color:#0076A9; border-color:#0076A9;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" fill="currentColor"  class="bi bi-search" viewBox="0 0 16 16">
+							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+						</svg>
+					</button>
+				</div><br>
+			</div>
+			<p>
+				<button style="margin-top:5px"  type="button" class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					Filtrar Capitalización
+				</button>
+			</p>
+			<div class="collapse" id="collapseExample">
+				<div class="card card-body">
+					<div class= "form-group">
+						<input class="form-control" style="width: 40%; height: 50px; border-radius:5px" name="min_mc" id="min_mc" placeholder="Min marketcap"/>
+						<input class="form-control" style="margin-left:20%; width: 40%; height: 50px; border-radius:5px" name="max_mc" id="max_mc" placeholder="Max marketcap"/>
+					</div>
+				</div>
+			</div>
+		</form>
+	<h3> Resultados:  {{ results|length }}</h3>
+	
+	{% if results %}
+	</center>
+		<dl class="uk-description-list-line">
+			<div class="container">
+				<div class="row" >
+				{% for row in results %}
+					<div class="col-sm-3 card text-center border-info">
+						<div class="card-body">
+							<h4 class="card-title">{{row.0}}({{row.1}})</h4>
+							<center>
+								<img style="display:block; margin-top:20px; margin-bottom:20px " height="32" width="32" src={{row.3}}>
+							</center>
+							{%if row.8%}
+								{{row.2}}
+								<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{row.1}}">
+									Haga click aqui para obtener más información
+								</button>
+								<div class="modal fade" id="exampleModal{{row.1}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">{{row.name}}</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										</div>
+										<div class="modal-body">
+											<div class="card text-center border-info">
+												<div class="card-body">
+													<h4 class="card-title">{{row.0}}({{row.1}})</h4>
+														<center>
+															<img style="display:block; margin-top:20px; margin-bottom:20px " height="32" width="32" src={{row.3}}>
+														</center>
+														<b>Etiquetas:</b> {{row.6}}<br>
+														<b>Precio:</b> {{row.7}}$<br>
+														<b>Capitalizacion:</b> {{row.5}}$<br><hr>
+														{{row.8}}
+													</div>
+												</div>
+										</div>
+									</div>
+									</div>
+								</div>
+							{%endif%}
+							<br>
+							{%if user.is_authenticated %}
+								{%if row.4%}
+									<a class="btn btn-primary" href="http://127.0.0.1:8000/delete/{{row.0}}">Quitar</a>
+								{%else %}
+									<a class="btn btn-primary" href="http://127.0.0.1:8000/save/{{row.0}}">Guardar</a>
+								{%endif %}
+							{%endif %}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</dl>
+		
+	{% endif %}
+{% endblock %}

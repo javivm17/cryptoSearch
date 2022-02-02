@@ -1,0 +1,26 @@
+{% extends 'menu.html' %}
+
+{% block titulo %} Buscador de criptomonedas {% endblock %}	    
+{% block contenido %} 
+<br /><br />
+<dl class="uk-description-list-line">
+    <div class="container">
+        <div class="row" >
+            <div class="card text-center border-info">
+                <div class="card-body">
+                    <h4 class="card-title">{{data.name}}({{data.abv}})</h4>
+                        <center>
+                            <img style="display:block; margin-top:20px; margin-bottom:20px " height="32" width="32" src={{data.img_url}}>
+                        </center>
+                        <b>Etiquetas:</b> {{data.labels}}<br>
+                        <b>Precio:</b> {{data.price}}<br>
+                        <b>Capitalizacion:</b> {{data.marketcap}}<br><hr>
+                        {{data.desc}}
+                    </div>
+                </div>
+        </div>
+    </div>
+</dl>
+
+{% endblock %}
+    

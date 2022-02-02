@@ -1,0 +1,51 @@
+{% extends 'menu.html' %} 
+{% block titulo %} Próximos lanzamientos{% endblock %}	
+{% block contenido %} 
+    <br>
+    <br> 
+    <center> 
+        <h2>Próximos lanzamientos</h2>
+    </center><br>
+
+    <dl class="uk-description-list-line">
+        <div class="container">
+            <div class="row" >
+                {% for row in data %}
+                    <div class="col-sm-3 card text-center border-info">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ row.name }}</h4>
+                            <center>
+                                <img style="display:block; margin-top:20px; margin-bottom:20px " height="32" width="32" src={{row.icon_url}}>
+                                <p class="card-text"><a>{{row.date}}</a></p>
+                                <hr>
+                            </center>
+                            <p class="card-text"><a>{{row.desc}}</a></p>
+                            
+                            {%if row.url_vid%}
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{row.id}}">
+                                Video
+                            </button>
+                            <div class="modal fade" id="exampleModal{{row.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">{{row.name}}</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe src="{{row.url_vid}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            {%endif%}    
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </dl>
+
+{% endblock %}

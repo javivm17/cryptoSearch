@@ -1,0 +1,27 @@
+<html>
+    {% extends 'menu.html' %} {% block encabezado %}
+
+    {% endblock %} {% block contenido %} 
+    <br>
+    <br> 
+            <center>
+                <div style="border: 1px solid; border-radius:5px; margin:20px; background-color:#C0ECFF; width: 20%;">
+                    <form style="margin-top:20px" id="formulario" method="post" action=''>{% csrf_token %}
+                        {% csrf_token %}
+                        {%if error%}
+                             <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endif %}
+                        {% for field in formulario %}
+                            <b>{{ field.label_tag }}</b><br>
+                            {{ field }}<br>
+                          </p>
+                        {% endfor %}
+                        <p><input type='submit' value='Enviar'></p>	
+                    </form>
+                </div>
+            </center>
+
+    {% endblock %}
+</html>

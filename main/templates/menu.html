@@ -1,0 +1,69 @@
+{% block encabezado %}{% endblock %}
+  <style type="text/css">
+    body { background-color: #DAF4FF; }
+    .ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #0076A9;
+      border-radius: 10px;
+    }
+    nav {
+      margin-top:7px;
+      width: 98%;
+    }
+    
+    .l{
+      float: left;
+
+    }
+    .r{
+      float: right;
+
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+      background-color: #98D2FF;
+    }
+
+  </style>
+  {% load staticfiles %}
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'crypto.png' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <center>
+    <nav class="">
+      <ul class="ul">
+        <li class="l"><a href="http://127.0.0.1:8000">Inicio</a></li>
+        <li class="l"><a href="http://127.0.0.1:8000/search_desc/">Buscador de criptos</a></li>
+        <li class="l"><a href="http://127.0.0.1:8000/fear_greed/">Fear and Greed Index</a></li>
+        <li class="l"><a href="http://127.0.0.1:8000/upcoming_icos/">Próximos lanzamientos</a></li>
+        {%if user.is_authenticated %}
+          <li class="l"><a href="http://127.0.0.1:8000/favs/">Favoritos</a></li>
+          <li class="r"><a href="http://127.0.0.1:8000/logout/">Cerrar sesión</a></li>
+        {% else %}
+          <li class="r"><a href="http://127.0.0.1:8000/login/">Iniciar sesión</a></li>
+          <li class="r"><a href="http://127.0.0.1:8000/signup/">Registro</a></li>
+        {% endif %}
+        {%if user.is_superuser%}
+          <li class="r"><a href="http://127.0.0.1:8000/charge/">Cargar datos</a></li>
+          <li class="r"><a href="http://127.0.0.1:8000/charge_rs/">Cargar RS</a></li>
+        {%endif%}
+      </ul>
+    </nav>  
+  </center>
+{% block contenido %}
+{% endblock %} 
+{% block pie %}{% endblock %} 

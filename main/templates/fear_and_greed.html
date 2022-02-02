@@ -1,0 +1,81 @@
+{% extends 'menu.html' %}
+
+{% block titulo %} Fear And Greed {% endblock %}	    
+{% block contenido %} 
+<br /><br />
+	<center>
+        <dl class="uk-description-list-line">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 card text-center border-info" style="background-color: #CDE9FF">
+                        <div class="card-body">
+                            {% if data.0 == "Extreme Fear" %}
+                                <dt><h2 style="color:red;">{{data.0}} ({{data.1}})</h2></dt>
+                                <br />
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: {{data.1}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{data.1}}%</div>
+                                </div>
+                            {% elif data.0 == "Fear" %}
+                                <dt><h2 style="color:orange;">{{data.0}} ({{data.1}})</h2></dt>
+                                <br />
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: {{data.1}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{data.1}}%</div>
+                                </div>
+                            {% elif data.0 == "Greed" %}
+                                <dt><h2 style="color:#7CEE0A;">{{data.0}} ({{data.1}})</h2></dt>
+                                <br />
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: {{data.1}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{data.1}}%</div>
+                                </div>
+                            {% else %}
+                                <dt><h2 style="color:green;">{{data.0}} ({{data.1}})</h2></dt>
+                                <br />
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: {{data.1}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{data.1}}%</div>
+                                </div>
+                            {%endif%}
+                            <br><br><br>
+                            <p class="align-self-end r">Última actualizacion: {{data.2}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </dl>
+        <h2 class="uk-heading-line uk-text-center">Historial</h2>
+        <p class="text-center">Últimos 8 días</p><br>	
+	</center>
+    <dl class="uk-description-list-line">
+        <div class="container">
+            <div class="row">
+            {% for row in historial %}
+                <div class="col-sm-3 card text-center border-info">
+                    <div class="card-body">
+                        <h4 class="card-title">{{row.date}}</h4>
+                        {% if row.name == "Extreme Fear" %}
+                            <dt><h4 style="color:red;">{{row.name}}</h4></dt>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: {{row.index}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{row.index}}%</div>
+                            </div>
+                        {% elif row.name == "Fear" %}
+                            <dt><h4 style="color:orange;">{{row.name}}</h4></dt>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: {{row.index}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{row.index}}%</div>
+                            </div>
+                        {% elif row.name == "Greed" %}
+                            <dt><h4 style="color:#7CEE0A;">{{row.name}}</h4></dt>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: {{row.index}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{row.index}}%</div>
+                            </div>
+                        {% else %}
+                            <dt><h4 style="color:green;">{{row.name}}</h4></dt>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: {{row.index}}%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">{{row.index}}%</div>
+                            </div>
+                        {%endif%}<br><br><br>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </dl>
+{% endblock %}

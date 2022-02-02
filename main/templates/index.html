@@ -1,0 +1,29 @@
+<html>
+    {% extends 'menu.html' %} {% block encabezado %}
+    {% endblock %} {% block contenido %} 
+        <center><h2>Página de inicio</h2>
+            {% if rec_cryptos%}
+                <dl class="uk-description-list-line">
+                    <div class="container">
+                        <p class="text-center">Criptomonedas recomendadas para ti.</p>
+                        <div class="row" >
+                            {% for row in rec_cryptos %}
+                                <div class="col-sm-3 card text-center border-info">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{ row.name }}</h4>
+                                        <center>
+                                            <img style="display:block; margin-top:20px; margin-bottom:20px " height="32" width="32" src={{row.img_url}}>
+                                        </center>
+                                        <a class="btn btn-primary" href="http://127.0.0.1:8000/save/{{row.name}}">Guardar</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </dl>
+            {%endif%}
+            {% load staticfiles %}     
+            <img src="{% static 'cripto.jpg' %}">   
+        </center>
+    {% endblock %}
+</html>

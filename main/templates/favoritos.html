@@ -1,0 +1,39 @@
+{% extends 'menu.html' %} 
+{% block titulo %} Favoritos {% endblock %}	
+{% block contenido %} 
+    <br>
+    <br> 
+    {% if data %}
+        <center> 
+            <h2>Criptomonedas marcadas como favoritas</h2>
+            {% if mensaje %}
+                <div class="alert alert-success" role="alert">
+                    {{ mensaje}}
+                </div>
+            {% endif %}
+        </center><br>
+
+        <dl class="uk-description-list-line">
+            <div class="container">
+                <div class="row" >
+                    {% for row in data %}
+                        <div class="col-sm-3 card text-center border-info">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ row.name }}</h4>
+                                <center>
+                                    <img style="display:block; margin-top:20px; margin-bottom:20px " height="32" width="32" src={{row.img_url}}>
+                                </center>
+                                <a class="btn btn-primary" href="http://127.0.0.1:8000/delete/{{row.name}}">Quitar</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </dl>
+    
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                No hay criptomonedas marcadas como favoritas
+            </div>   
+        {% endif %}
+{% endblock %}

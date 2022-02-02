@@ -1,0 +1,7 @@
+urllib3==1.22
+requests==2.18.4
+Django==2.2.5
+django_crontab==0.7.1
+Whoosh==2.7.4
+beautifulsoup4
+html5lib==1.1
